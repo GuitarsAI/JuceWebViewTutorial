@@ -31,3 +31,4 @@
 *.out
 *.app
 /WebPlayRec/JUCE
+/WebPlayRec/build
