@@ -1,7 +1,10 @@
 #include "MainComponent.h"
 
 //==============================================================================
-MainComponent::MainComponent()
+MainComponent::MainComponent() : webview(juce::WebBrowserComponent::Options{}.withBackend(
+                                                                                 juce::WebBrowserComponent::Options::Backend::webview2)
+                                             .withWinWebView2Options(
+                                                 juce::WebBrowserComponent::Options::WinWebView2{}))
 {
     setOpaque(true);
     addAndMakeVisible(liveAudioScroller);
@@ -26,6 +29,8 @@ MainComponent::MainComponent()
     };
 
     addAndMakeVisible(recordingThumbnail);
+    addAndMakeVisible(webview);
+    webview.goToURL("http://localhost:5000");
 
 #ifndef JUCE_DEMO_RUNNER
     RuntimePermissions::request(RuntimePermissions::recordAudio,
@@ -60,4 +65,5 @@ void MainComponent::resized()
     recordingThumbnail.setBounds(area.removeFromTop(80).reduced(8));
     recordButton.setBounds(area.removeFromTop(36).removeFromLeft(140).reduced(8));
     explanationLabel.setBounds(area.reduced(8));
+    webview.setBounds(area.removeFromBottom(400));
 }

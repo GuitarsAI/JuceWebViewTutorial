@@ -219,6 +219,8 @@ private:
     AudioDeviceManager &audioDeviceManager{getSharedAudioDeviceManager(1, 0)};
 #endif
 
+    WebBrowserComponent webview;
+
     LiveScrollingAudioDisplay liveAudioScroller;
     RecordingThumbnail recordingThumbnail;
     AudioRecorder recorder{recordingThumbnail.getAudioThumbnail()};
